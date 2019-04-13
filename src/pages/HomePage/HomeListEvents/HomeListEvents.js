@@ -1,14 +1,25 @@
-import React from 'react'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
+import React, { Component } from 'react'
+import { getEvent } from '../../../services/ApiService'
+import ListEvents from './ListEvents'
 
-export function HomeListEvents (props) {
-  return (
-    <List>
-      <ListItem>Centraal graduacion</ListItem>
-      <ListItem>Centraal graduacion</ListItem>
-    </List>
-  )
+export class HomeListEvents extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      events: []
+    }
+  }
+  componentDidMount () {
+    getEvent()
+      .then(events => this.setState({ events }))
+      .catch(console.error)
+  }
+
+  render () {
+    return (
+      <ListEvents events={this.state.events} />
+    )
+  }
 }
 
 export default HomeListEvents
