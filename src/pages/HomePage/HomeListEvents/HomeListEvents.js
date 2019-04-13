@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getEvent } from '../../../services/ApiService'
+import { getEvents } from '../../../services/ApiService'
 import ListEvents from './ListEvents'
 
 export class HomeListEvents extends Component {
@@ -10,7 +10,7 @@ export class HomeListEvents extends Component {
     }
   }
   componentDidMount () {
-    getEvent()
+    getEvents()
       .then(events => this.setState({ events }))
       .catch(console.error)
   }
