@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { getEvents } from '../../../services/ApiService'
 import ListEvents from './ListEvents'
 
@@ -8,7 +9,15 @@ export class HomeListEvents extends Component {
     this.state = {
       events: []
     }
+    this.goToEvent = this.goToEvent.bind(this)
   }
+
+  goToEvent (event) {
+    const element = event.target
+    const eventId = element.dataset.event
+    this.props.history.push(`events/${eventId}`)
+  }
+
   componentDidMount () {
     getEvents()
       .then(events => this.setState({ events }))
@@ -17,9 +26,9 @@ export class HomeListEvents extends Component {
 
   render () {
     return (
-      <ListEvents events={this.state.events} />
+      <ListEvents onClick={this.goToEvent} events={this.state.events} />
     )
   }
 }
 
-export default HomeListEvents
+export default withRouter(HomeListEvents)

@@ -1,15 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 
-export function ListEvents ({ events }) {
+export function ListEvents ({ events, ...props }) {
   return (
     <List>
       { events.map(event =>
-        <ListItem key={event._id}>
-          <Link to={`/events/${event._id}`}>{event.name}</Link>
-        </ListItem>
+        <ListItem {...props} data-event={event._id} key={event._id}>{event.name}</ListItem>
       )}
     </List>
   )
