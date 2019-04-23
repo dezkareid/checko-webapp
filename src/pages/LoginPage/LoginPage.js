@@ -3,7 +3,6 @@ import Page from '../../components/Page/Page'
 import Container from '../../components/Container/Container'
 import LoginForm from './LoginForm'
 import { loginUser } from '../../services/AuthService'
-import { getUserInfo } from '../../services/ApiService'
 
 export class LoginPage extends Component {
   constructor (props) {
@@ -14,13 +13,13 @@ export class LoginPage extends Component {
     }
     this.onChangeField = this.onChangeField.bind(this)
     this.onSubmitLoginForm = this.onSubmitLoginForm.bind(this)
+    this.redirectHome = this.redirectHome.bind(this)
   }
 
   onSubmitLoginForm (event) {
     event.preventDefault()
     loginUser(this.state)
-      .then(getUserInfo)
-      .then(console.log)
+      .then(this.redirectHome)
       .catch(console.error)
   }
 
@@ -29,6 +28,9 @@ export class LoginPage extends Component {
     this.setState({ [target.name]: target.value })
   }
 
+  redirectHome () {
+    this.props.history.push('/')
+  }
   render () {
     return (
       <Page title='Iniciar sesión'>
