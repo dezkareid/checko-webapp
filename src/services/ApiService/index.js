@@ -11,3 +11,11 @@ export function getEvent (id) {
   return fetch(`http://localhost:9000/api/event/${id}`)
     .then(response => response.json())
 }
+
+export function getUserInfo () {
+  const options = {
+    credentials: 'include'
+  }
+  return fetch('http://localhost:9000/api/user/me', options)
+    .then(response => response.json())
+}
